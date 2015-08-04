@@ -39,7 +39,7 @@ def go():
                 index = input("select: ")
                 if index == 0:
                     break
-                if index > 0 and index < len(dir_paths):
+                if index > 0 and index <= len(dir_paths):
                     cd_dir = dir_paths[index - 1]
                     break
                 print "GO [ERROR]: Please input right index!"
@@ -57,7 +57,7 @@ def go():
             server.expect('.*ssword:')
             server.sendline(password)
         if cd_dir:
-            server.expect(['.*\#', '.*~>', '.*\$'])
+            server.expect(['.*\#', '.*~>', '.*\$'], timeout=1800)
             server.sendline("cd %s" % cd_dir)
             print "GO [INFO]: login [%s] successfully!" % machine
         server.interact()
